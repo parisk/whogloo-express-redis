@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var redis = require('redis');
 
-var client = redis.createClient({host: 'redis', port: '6379'});
+var redisUrl = (process.env['REDIS_URL'] || 'redis://redis:6379');
+var client = redis.createClient(redisUrl);
 
 client.on('connect', function() {
     console.log('connected');
